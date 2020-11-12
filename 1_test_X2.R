@@ -7,7 +7,7 @@ library(MASS)
 #  A.1 Tomaremos como ejemplo varios datos conjuntos de datos:
 
 #  el data frame "survey" que está incluido en el paquete `MASS`
-#  survey lista las respuestas de un grupo de 237 estudiantes 
+#  survey lista las respuestas de un grupo de 237 estudiantes
 #  en una encuesta.
 #  Revisemos su contenido
 
@@ -101,8 +101,8 @@ mosaicplot(pobreza_t,
 
 
 #      El test de X2 evalúa si la independencia entre las variables:
-#      ¿Los valores de ambas variables categóricas son independientes? 
-#      Hipótesis nula (H0) o, Por el contrario, los valores de una 
+#      ¿Los valores de ambas variables categóricas son independientes?
+#      Hipótesis nula (H0) o, Por el contrario, los valores de una
 #      variable dependen de los valores de la otra variable
 
 
@@ -171,7 +171,7 @@ library(corrplot)
 corrplot(chi_pobreza$residuals, is.cor = FALSE)
 
 
-# ¿Cuánto contribuye cada celda al valor total de 
+# ¿Cuánto contribuye cada celda al valor total de
 #  chi-cuadrado?
 
 
@@ -183,7 +183,7 @@ corrplot(contrib, is.cor=FALSE)
 
 ###      D. Test de Bondad de ajuste chi-cuadrado
 
-#  ¿Se ajusta lo observado a un panorama en que la probabilidad 
+#  ¿Se ajusta lo observado a un panorama en que la probabilidad
 #  de estar en diferentes situaciones económico-sociales es similar?
 
 pobreza_u<-as.table(pobreza$Urbano)
@@ -222,7 +222,7 @@ fisher.test(hand_clap)
 #  El valor de chi-cuadrada o el p.value no nos dicen por si mismos
 #  Que tan fuerte es la asociacion entre las variables
 #  Sino solamente que la asociacion es significativa
-#  Es por eso que se hacen otros cálculos para medir el tamaño 
+#  Es por eso que se hacen otros cálculos para medir el tamaño
 #  del efecto
 
 
@@ -248,7 +248,7 @@ sex_hand_p<-prop.table(sex_hand, margin = 1)
 
 sex_hand[1,1]/sex_hand[2,1]
 
-#  hay un riesgo de ser zurdo de 0.7 para las mujeres en relación con 
+#  hay un riesgo de ser zurdo de 0.7 para las mujeres en relación con
 #  los hombres
 
 
@@ -263,7 +263,7 @@ library(epitools)
 
 #                         disease=0   disease=1
 #         tratamiento=0 (ref)    n00         n01
-#         tratamiento=1          n10         n11  
+#         tratamiento=1          n10         n11
 
 
 #  En el caso de la tabla de infartos tendremos que voltear las columnas
@@ -277,7 +277,7 @@ oddsratio(infartos, rev="b")
 
 #  El riesgo relativo es de 1.81 y su intervalo de confianza no pasa por
 #  1. Esto quiere decir que por cada infarto con aspirina hay 1.83
-#  infartos con el Placebo. Para muestras pequeñas el risk ratio y el 
+#  infartos con el Placebo. Para muestras pequeñas el risk ratio y el
 #  odds ratio suelen ser parecidos.
 
 oddsratio(sex_hand, rev="b")
@@ -286,7 +286,7 @@ oddsratio(sex_hand, rev="b")
 #  cero. Tenemos un efecto significativo, pero el test de asociación
 #  de variables chi-cuadrado no es significativo.
 
-, 
+
 
 #  C.1 Tamaño del efecto para tablas mayores a 2x2
 

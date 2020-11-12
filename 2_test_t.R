@@ -35,7 +35,7 @@ summary(survey)
 #   normal
 
 altura_sexo<-data.frame(
-             altura=survey$Height, 
+             altura=survey$Height,
              sexo=as.factor(survey$Sex)
              )
 
@@ -55,7 +55,7 @@ Male<-altura_sexo[altura_sexo$sexo=="Male", 1]
 
 
 #  A.3 Cantidad de usuarios de Internet conectados a un
-#  servidor por minuto (dataset WWWusage, R). 
+#  servidor por minuto (dataset WWWusage, R).
 
 #  este tipo de datos suele seguir una distribucion Poisson
 
@@ -73,18 +73,18 @@ usage<-data.frame(users=as.numeric(WWWusage))
 
 library("ggplot2")
 
-ggplot(peso_dieta, aes(x=peso, fill=dieta, y=..density..)) + 
+ggplot(peso_dieta, aes(x=peso, fill=dieta, y=..density..)) +
 geom_histogram(position="identity")+
 geom_density(alpha=0.04)
 
-ggplot(altura_sexo, aes(x=altura, fill=sexo, y=..density..)) + 
+ggplot(altura_sexo, aes(x=altura, fill=sexo, y=..density..)) +
 geom_histogram(position="identity")+
 geom_density(alpha=0.04)
 
 ggplot(data=usage, aes(x=users, y=..density..)) + geom_histogram(bins=20, position="identity") + geom_density()
 
 
-#   B.1.b Observando la correlación entre los cuantiles de 
+#   B.1.b Observando la correlación entre los cuantiles de
 #   los datos y los cuantiles de una distribución normal
 #   mediante Quantile-Quantile (Q-Q) plots
 
@@ -98,7 +98,7 @@ ggqqplot(usage$users)
 
 
 
-#   B.1.c Evaluando la hipotesis de normalidad mediante el 
+#   B.1.c Evaluando la hipotesis de normalidad mediante el
 #   test de Shapiro-Wilk
 
 #   La hipotesis nula (H0) de este test es que la distribucion
@@ -132,7 +132,7 @@ shapiro.test( Male )
 #   Así pues, en los siguientes tests esperamos una p no significativa
 
 
-#   B.2.a Si estamos seguros de que los datos de ambos grupos 
+#   B.2.a Si estamos seguros de que los datos de ambos grupos
 #   provienen de una distribucion normal podemos utilizar el test F
 #   -contraste de la razón de varianzas-
 
@@ -145,9 +145,9 @@ var.test(altura ~ sexo, data = altura_sexo)
 
 
 #   B.2.b El test de Bartlett permite contrastar las varianzas de dos o
-#   mas grupos sin la necesidad de que el tamaño de los grupos 
+#   mas grupos sin la necesidad de que el tamaño de los grupos
 #   sea el mismo. Es adecuado para datos normales.
-  
+
 bartlett.test(peso ~ dieta, data = peso_dieta)
 
 bartlett.test(altura ~ sexo, data = altura_sexo)
@@ -159,12 +159,11 @@ bartlett.test(altura ~ sexo, data = altura_sexo)
 
 #   B.3.a Criterio de rango intercuartil (IQR)
 #   Todo lo que este 1.5*IQR por encima del tercer cuartil o 1.5*IQR por
-#   debajo del primer cuartil se considera outlier potencial 
+#   debajo del primer cuartil se considera outlier potencial
 #   El IQR es la distancia entre el primer y el tercer cuartil
 
 
-ggplot(altura_sexo, aes(x=sexo, y=altura)) + geom_boxplot(outlier.colour="red") + 
-geom_jitter(position=position_jitter(0.2))
+ggplot(altura_sexo, aes(x=sexo, y=altura)) + geom_boxplot(outlier.colour="red")
 
 
 #   Encontrando los limites superior e inferior segun este criterio
@@ -204,9 +203,8 @@ altura_sexo<-altura_sexo[!(
 
 #   Distribución tras la eliminación del outlier
 
-ggplot(altura_sexo, aes(x=sexo, y=altura)) + 
-geom_boxplot(outlier.colour="red") + 
-geom_jitter(position=position_jitter(0.2))
+ggplot(altura_sexo, aes(x=sexo, y=altura)) +
+geom_boxplot(outlier.colour="red")
 
 
 #  Hay varios otros criterios y pruebas estadísticas para identificar
@@ -218,10 +216,10 @@ geom_jitter(position=position_jitter(0.2))
 
 #      C. Realizando el test t
 
-#      EL test compara promedios, ya sea con un valor fijo o entre 
+#      EL test compara promedios, ya sea con un valor fijo o entre
 #      dos grupos independientes
 
-#      Queremos saber si el promedio de un grupo es 
+#      Queremos saber si el promedio de un grupo es
 #      Significativamente distinto a un valor
 
 t.test(A, mu = 3)
@@ -233,14 +231,14 @@ t.test(A, mu=3, alternative="greater")
 t.test(Female, mu = 1.50, alternative="greater")
 
 
-#      Ahora queremos saber si los promedios de ambos grupos 
+#      Ahora queremos saber si los promedios de ambos grupos
 #      son significativamente distintos entre si
 
 t.test(peso~dieta, peso_dieta, var.equal=TRUE)
 
 t.test(altura~sexo, altura_sexo)
 
-# Si en t.test se utiliza la opcion: 
+# Si en t.test se utiliza la opcion:
 # var.equal=TRUE el calculo se vuelve igual al ajuste al modelo lineal:
 # lm(size~group, size_group)
 # el t-test es un caso particular del ajuste a un modelo lineal
@@ -318,7 +316,7 @@ leveneTest(altura ~ sexo, data = altura_sexo)
 #___ Outliers: criterios y pruebas estadísticas para su detección  ___#
 
 
-#   Considerar outlier los datos que queden fuera del 
+#   Considerar outlier los datos que queden fuera del
 #   rango que va del percentil 2.5 al percentil 97.5
 
 
@@ -360,7 +358,7 @@ library("outliers")
 #   H1: El valor más alto/bajo es un outlier
 
 #   Test para el valor más bajo
-grubbs.test(A) 
+grubbs.test(A)
 #   Test para el valor más alto
 grubbs.test(A, opposite=TRUE)
 
@@ -386,7 +384,7 @@ dixon.test(A, opposite =TRUE)
 library("EnvStats")
 
 #  En el test indicamos cuantos outliers suponemos que hay
-#  En este caso suponemos que hay 2 
+#  En este caso suponemos que hay 2
 
 rosner_A <- rosnerTest(A, k = 3)
 
